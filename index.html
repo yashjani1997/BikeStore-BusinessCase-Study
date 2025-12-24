@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BikeStore Sales Analytics | SQL + Power BI Case Study</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Segoe UI',sans-serif;
+  background:radial-gradient(circle at top,#020617,#000);
+  color:#e5e7eb;
+  line-height:1.6;
+}
+.container{width:90%;max-width:1200px;margin:auto}
+section{margin:80px 0}
+
+/* ---------- HERO ---------- */
+.hero{text-align:center;padding:90px 0}
+.hero h1{font-size:3rem;color:#60a5fa}
+.hero p{margin-top:12px;color:#cbd5f5;font-size:1.1rem}
+.badge{
+  margin-top:22px;
+  display:inline-block;
+  padding:8px 18px;
+  border-radius:20px;
+  background:rgba(96,165,250,.15);
+  border:1px solid rgba(96,165,250,.3);
+  font-size:.9rem
+}
+
+/* ---------- TITLES ---------- */
+.section-title{font-size:2rem;margin-bottom:18px}
+.section-desc{color:#cbd5f5;max-width:900px}
+
+/* ---------- CARD ---------- */
+.card{
+  margin-top:25px;
+  background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.03));
+  backdrop-filter:blur(18px);
+  border-radius:22px;
+  padding:32px;
+  border:1px solid rgba(255,255,255,.08)
+}
+
+/* ---------- KPI ---------- */
+.kpi-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:22px
+}
+.kpi{text-align:center}
+.kpi h3{font-size:2.3rem;color:#4ade80}
+.kpi span{font-size:.9rem;color:#cbd5f5}
+
+/* ---------- LIST ---------- */
+ul{padding-left:20px;margin-top:10px}
+li{margin-bottom:10px}
+
+/* ---------- IMAGE ---------- */
+img{
+  width:100%;
+  margin-top:18px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.08)
+}
+
+/* ---------- FOOTER ---------- */
+footer{
+  padding:45px 0;
+  text-align:center;
+  font-size:.9rem;
+  color:#94a3b8
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<div class="hero container">
+  <h1>BikeStore Sales Performance Analysis</h1>
+  <p>End-to-End Business Analytics Case Study using SQL & Power BI</p>
+  <div class="badge">Advanced Retail Analytics • Recruiter-Ready</div>
+</div>
+
+<!-- BUSINESS PROBLEM -->
+<section class="container">
+  <h2 class="section-title">Business Problem</h2>
+  <p class="section-desc">
+    A bike retail company wanted a clear understanding of sales performance,
+    discount impact, category contribution, and store efficiency to support
+    data-driven business decisions.
+  </p>
+  <div class="card">
+    <ul>
+      <li>Which products and categories drive maximum revenue?</li>
+      <li>How do discounts impact net revenue and margins?</li>
+      <li>Which stores and staff contribute most to sales?</li>
+      <li>Are there seasonal and weekly sales patterns?</li>
+    </ul>
+  </div>
+</section>
+
+<!-- DATASET -->
+<section class="container">
+  <h2 class="section-title">Dataset & Data Model</h2>
+  <p class="section-desc">
+    The analysis is based on a real-world BikeStore retail dataset consisting of
+    9 relational tables designed using a star-schema approach.
+  </p>
+  <div class="card">
+    <ul>
+      <li><b>Fact Table:</b> order_items (transaction-level sales)</li>
+      <li><b>Dimensions:</b> customers, products, categories, brands, stores, staff, orders</li>
+      <li><b>Grain:</b> Order-item level</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SQL ANALYSIS -->
+<section class="container">
+  <h2 class="section-title">SQL Analysis (Validated Metrics)</h2>
+  <p class="section-desc">
+    All KPIs and insights were calculated using SQL (joins, CTEs, window
+    functions) to ensure accuracy before visualization in Power BI.
+  </p>
+
+  <div class="card kpi-grid">
+    <div class="kpi"><h3>7.69M</h3><span>Total Revenue</span></div>
+    <div class="kpi"><h3>1615</h3><span>Total Orders</span></div>
+    <div class="kpi"><h3>1445</h3><span>Total Customers</span></div>
+    <div class="kpi"><h3>4.76K</h3><span>Avg Order Value</span></div>
+  </div>
+
+  <img src="images/sql_outputs.png" alt="SQL Output Evidence">
+</section>
+
+<!-- POWER BI -->
+<section class="container">
+  <h2 class="section-title">Power BI Dashboard</h2>
+  <p class="section-desc">
+    SQL-validated metrics are transformed into an interactive Power BI dashboard
+    to support quick, data-driven decision-making.
+  </p>
+  <div class="card">
+    <ul>
+      <li>KPI cards for revenue, orders, customers, discounts</li>
+      <li>Monthly and weekly revenue trends</li>
+      <li>Category, product, store & staff performance</li>
+    </ul>
+  </div>
+  <img src="images/powerbi_dashboard.png" alt="Power BI Dashboard">
+</section>
+
+<!-- INSIGHTS -->
+<section class="container">
+  <h2 class="section-title">Key Business Insights</h2>
+  <div class="card">
+    <ul>
+      <li>Mountain Bikes generate the highest revenue but also face margin risk due to heavy discounts.</li>
+      <li>Revenue is concentrated in a limited set of products, indicating dependency risk.</li>
+      <li>Baldwin Bikes outperforms other stores in both revenue and order volume.</li>
+      <li>Sales show strong seasonality with specific peak months.</li>
+      <li>Weekends and Mondays outperform mid-week sales.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- RECOMMENDATIONS -->
+<section class="container">
+  <h2 class="section-title">Business Recommendations</h2>
+  <div class="card">
+    <ul>
+      <li>Apply category-specific discount strategies to protect margins.</li>
+      <li>Expand high-profit categories to reduce revenue concentration risk.</li>
+      <li>Leverage top-performing staff practices across stores.</li>
+      <li>Run targeted campaigns during high-performing seasons and days.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- LIMITATIONS -->
+<section class="container">
+  <h2 class="section-title">What I Didn’t Do & Why</h2>
+  <div class="card">
+    <ul>
+      <li>Sales forecasting – future data was unavailable.</li>
+      <li>Customer lifetime value – repeat purchase lifecycle data was missing.</li>
+      <li>Inventory optimization – stock movement analysis was out of scope.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- CONCLUSION -->
+<section class="container">
+  <h2 class="section-title">Conclusion</h2>
+  <p class="section-desc">
+    This project demonstrates an end-to-end retail analytics workflow — from SQL-based
+    validation to Power BI visualization and executive-level insights — reflecting
+    a strong business-oriented analytical mindset.
+  </p>
+</section>
+
+<footer>
+  Built by Yash • SQL • Power BI • Business Analytics
+</footer>
+
+</body>
+</html>
