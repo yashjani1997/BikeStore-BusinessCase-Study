@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>BikeStore Sales Analytics | SQL + Power BI Case Study</title>
+<title>BikeStore Business Case Study | SQL & Power BI</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -16,7 +16,7 @@ body{
 .container{width:90%;max-width:1200px;margin:auto}
 section{margin:80px 0}
 
-/* ---------- HERO ---------- */
+/* HERO */
 .hero{text-align:center;padding:90px 0}
 .hero h1{font-size:3rem;color:#60a5fa}
 .hero p{margin-top:12px;color:#cbd5f5;font-size:1.1rem}
@@ -30,11 +30,11 @@ section{margin:80px 0}
   font-size:.9rem
 }
 
-/* ---------- TITLES ---------- */
+/* TITLES */
 .section-title{font-size:2rem;margin-bottom:18px}
 .section-desc{color:#cbd5f5;max-width:900px}
 
-/* ---------- CARD ---------- */
+/* CARD */
 .card{
   margin-top:25px;
   background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.03));
@@ -44,7 +44,7 @@ section{margin:80px 0}
   border:1px solid rgba(255,255,255,.08)
 }
 
-/* ---------- KPI ---------- */
+/* KPI */
 .kpi-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -54,11 +54,11 @@ section{margin:80px 0}
 .kpi h3{font-size:2.3rem;color:#4ade80}
 .kpi span{font-size:.9rem;color:#cbd5f5}
 
-/* ---------- LIST ---------- */
+/* LIST */
 ul{padding-left:20px;margin-top:10px}
 li{margin-bottom:10px}
 
-/* ---------- IMAGE ---------- */
+/* IMAGE */
 img{
   width:100%;
   margin-top:18px;
@@ -66,7 +66,23 @@ img{
   border:1px solid rgba(255,255,255,.08)
 }
 
-/* ---------- FOOTER ---------- */
+/* BUTTON */
+.download-btn{
+  display:inline-block;
+  padding:14px 30px;
+  border-radius:30px;
+  background:#60a5fa;
+  color:#020617;
+  font-weight:600;
+  text-decoration:none;
+  transition:all .25s ease
+}
+.download-btn:hover{
+  background:#93c5fd;
+  transform:translateY(-2px)
+}
+
+/* FOOTER */
 footer{
   padding:45px 0;
   text-align:center;
@@ -89,16 +105,16 @@ footer{
 <section class="container">
   <h2 class="section-title">Business Problem</h2>
   <p class="section-desc">
-    A bike retail company wanted a clear understanding of sales performance,
+    A bike retail company wanted to gain clear visibility into its sales performance,
     discount impact, category contribution, and store efficiency to support
-    data-driven business decisions.
+    data-driven decision-making.
   </p>
   <div class="card">
     <ul>
-      <li>Which products and categories drive maximum revenue?</li>
-      <li>How do discounts impact net revenue and margins?</li>
+      <li>Which products and categories generate the highest revenue?</li>
+      <li>How do discounts affect net revenue and profitability?</li>
       <li>Which stores and staff contribute most to sales?</li>
-      <li>Are there seasonal and weekly sales patterns?</li>
+      <li>Are there seasonal and weekday sales patterns?</li>
     </ul>
   </div>
 </section>
@@ -123,8 +139,8 @@ footer{
 <section class="container">
   <h2 class="section-title">SQL Analysis (Validated Metrics)</h2>
   <p class="section-desc">
-    All KPIs and insights were calculated using SQL (joins, CTEs, window
-    functions) to ensure accuracy before visualization in Power BI.
+    All KPIs and insights were calculated using SQL (joins, CTEs, window functions)
+    to ensure accuracy before visualization in Power BI.
   </p>
 
   <div class="card kpi-grid">
@@ -142,12 +158,12 @@ footer{
   <h2 class="section-title">Power BI Dashboard</h2>
   <p class="section-desc">
     SQL-validated metrics are transformed into an interactive Power BI dashboard
-    to support quick, data-driven decision-making.
+    to support fast, business-focused decision-making.
   </p>
   <div class="card">
     <ul>
-      <li>KPI cards for revenue, orders, customers, discounts</li>
-      <li>Monthly and weekly revenue trends</li>
+      <li>KPI cards for revenue, orders, customers, discount %, net revenue</li>
+      <li>Monthly & weekly revenue trends</li>
       <li>Category, product, store & staff performance</li>
     </ul>
   </div>
@@ -159,10 +175,10 @@ footer{
   <h2 class="section-title">Key Business Insights</h2>
   <div class="card">
     <ul>
-      <li>Mountain Bikes generate the highest revenue but also face margin risk due to heavy discounts.</li>
-      <li>Revenue is concentrated in a limited set of products, indicating dependency risk.</li>
-      <li>Baldwin Bikes outperforms other stores in both revenue and order volume.</li>
-      <li>Sales show strong seasonality with specific peak months.</li>
+      <li>Mountain Bikes generate the highest revenue but also carry margin risk due to high discounts.</li>
+      <li>Revenue is concentrated across a limited set of products.</li>
+      <li>Baldwin Bikes significantly outperforms other stores.</li>
+      <li>Sales exhibit strong seasonality with identifiable peak months.</li>
       <li>Weekends and Mondays outperform mid-week sales.</li>
     </ul>
   </div>
@@ -173,10 +189,10 @@ footer{
   <h2 class="section-title">Business Recommendations</h2>
   <div class="card">
     <ul>
-      <li>Apply category-specific discount strategies to protect margins.</li>
-      <li>Expand high-profit categories to reduce revenue concentration risk.</li>
-      <li>Leverage top-performing staff practices across stores.</li>
-      <li>Run targeted campaigns during high-performing seasons and days.</li>
+      <li>Adopt category-specific discount strategies to protect margins.</li>
+      <li>Scale high-profit categories to reduce revenue dependency risk.</li>
+      <li>Replicate best practices from top-performing stores and staff.</li>
+      <li>Run targeted campaigns during high-performing seasons and weekdays.</li>
     </ul>
   </div>
 </section>
@@ -190,6 +206,25 @@ footer{
       <li>Customer lifetime value – repeat purchase lifecycle data was missing.</li>
       <li>Inventory optimization – stock movement analysis was out of scope.</li>
     </ul>
+  </div>
+</section>
+
+<!-- PROJECT FILES -->
+<section class="container">
+  <h2 class="section-title">Project Files</h2>
+  <p class="section-desc">
+    The complete Power BI dashboard used in this analysis is available for download.
+  </p>
+
+  <div class="card" style="text-align:center">
+    <a class="download-btn"
+       href="https://raw.githubusercontent.com/yashjani1997/BikeStore-BusinessCase-Study/main/BikeStoreDashBoard.zip"
+       target="_blank">
+       ⬇ Download Power BI Dashboard (.pbix)
+    </a>
+    <p style="margin-top:10px;font-size:.85rem;color:#cbd5f5">
+      *Unzip the file and open it in Power BI Desktop
+    </p>
   </div>
 </section>
 
