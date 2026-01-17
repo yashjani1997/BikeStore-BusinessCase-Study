@@ -3,345 +3,326 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>BikeStore Business Case Study | SQL & Power BI</title>
+<title>BikeStore Sales Performance | Executive Analytics Report</title>
 
 <style>
-/* ================= THEME VARIABLES ================= */
-:root{
-  --bg-gradient:
-    radial-gradient(circle at 15% 10%, #e0e7ff 0%, transparent 40%),
-    radial-gradient(circle at 85% 20%, #cffafe 0%, transparent 45%),
-    linear-gradient(180deg,#f8fafc,#eef2ff);
-
-  --text-main:#020617;
-  --text-muted:#475569;
-
-  --card-bg:rgba(255,255,255,.78);
-  --card-border:rgba(2,6,23,.08);
-
-  --accent-primary:#4f46e5; /* indigo */
-  --accent-secondary:#22d3ee; /* cyan */
-  --accent-warm:#f59e0b; /* amber */
-
-  --kpi-gradient:linear-gradient(135deg,#4f46e5,#22d3ee);
-}
-
-body.dark{
-  --bg-gradient:
-    radial-gradient(circle at 15% 10%, #1e1b4b 0%, transparent 45%),
-    radial-gradient(circle at 85% 20%, #042f2e 0%, transparent 45%),
-    linear-gradient(180deg,#020617,#000);
-
-  --text-main:#e5e7eb;
-  --text-muted:#c7d2fe;
-
-  --card-bg:linear-gradient(
-    135deg,
-    rgba(255,255,255,.12),
-    rgba(255,255,255,.03)
-  );
-  --card-border:rgba(255,255,255,.10);
-}
-
-/* ================= GLOBAL ================= */
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
-  font-family:'Segoe UI',sans-serif;
-  background:var(--bg-gradient);
-  color:var(--text-main);
-  line-height:1.65;
-  transition:.4s ease;
+  font-family:system-ui,-apple-system,'Segoe UI',sans-serif;
+  background:#020617;
+  color:#e5e7eb;
+  line-height:1.7;
+  overflow-x:hidden;
 }
 
-.container{width:90%;max-width:1200px;margin:auto}
+/* ===== LIVE PARTICLE CANVAS ===== */
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:-3;
+}
+
+/* soft glow overlay */
+.glow{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(99,102,241,.15), transparent 45%),
+    radial-gradient(circle at 80% 70%, rgba(34,197,94,.12), transparent 45%);
+  z-index:-2;
+}
+
+/* ===== SCROLL REVEAL ===== */
+.reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:opacity .8s ease, transform .8s ease;
+}
+.reveal.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ================= LAYOUT ================= */
+.container{
+  width:90%;
+  max-width:1200px;
+  margin:auto;
+}
 section{margin:90px 0}
 
-/* ================= THEME TOGGLE ================= */
-.theme-toggle{
-  position:fixed;
-  top:22px;
-  right:28px;
-  z-index:1000;
-}
-.theme-toggle button{
-  padding:10px 22px;
-  border-radius:999px;
-  background:var(--card-bg);
-  border:1px solid var(--card-border);
-  color:var(--text-main);
-  font-weight:600;
-  backdrop-filter:blur(14px);
-  cursor:pointer;
-  transition:.35s ease;
-}
-.theme-toggle button:hover{
-  transform:translateY(-2px) scale(1.03);
-  box-shadow:0 10px 30px rgba(34,211,238,.35);
+/* ================= HERO ================= */
+.hero{
+  padding:130px 0 90px;
+  text-align:center;
 }
 
-/* ================= HERO ================= */
-.hero{text-align:center;padding:120px 0}
 .hero h1{
   font-size:3.2rem;
-  background:linear-gradient(135deg,var(--accent-primary),var(--accent-secondary));
+  background:linear-gradient(135deg,#4f46e5,#22d3ee);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
+
 .hero p{
-  margin-top:14px;
+  margin-top:16px;
   font-size:1.15rem;
-  color:var(--text-muted);
+  color:#c7d2fe;
 }
-.badge{
+
+.hero .badge{
   margin-top:26px;
   display:inline-block;
-  padding:10px 24px;
+  padding:10px 26px;
   border-radius:999px;
-  background:rgba(79,70,229,.15);
-  border:1px solid rgba(79,70,229,.35);
+  background:rgba(79,70,229,.18);
+  border:1px solid rgba(79,70,229,.45);
   font-size:.9rem;
 }
 
-/* ================= TITLES ================= */
+/* ================= SECTION TITLES ================= */
 .section-title{
   font-size:2.2rem;
-  margin-bottom:18px;
+  margin-bottom:16px;
 }
 .section-desc{
   max-width:900px;
-  color:var(--text-muted);
+  color:#c7d2fe;
 }
 
-/* ================= CARD ================= */
-.card{
+/* ================= BUSINESS PROBLEM ================= */
+.problem-box{
+  margin-top:32px;
+  padding-left:26px;
+  border-left:4px solid #4f46e5;
+}
+.problem-box ul{padding-left:18px}
+.problem-box li{margin-bottom:12px}
+
+/* ================= SOFT BOX ================= */
+.soft-box{
   margin-top:30px;
-  padding:38px;
-  border-radius:28px;
-  background:var(--card-bg);
-  border:1px solid var(--card-border);
-  backdrop-filter:blur(22px);
-  box-shadow:0 25px 55px rgba(2,6,23,.15);
-  transition:.4s ease;
-}
-.card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 35px 80px rgba(34,211,238,.30);
+  padding:30px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:22px;
+  background:linear-gradient(
+    135deg,
+    rgba(255,255,255,.14),
+    rgba(255,255,255,.04)
+  );
+  backdrop-filter:blur(18px);
 }
 
-/* ================= KPI ================= */
-.kpi-grid{
+/* ================= KPI STRIP ================= */
+.kpi-strip{
+  margin-top:40px;
+  padding:34px 20px;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:26px;
+  gap:32px;
+  border-top:1px solid rgba(255,255,255,.12);
+  border-bottom:1px solid rgba(255,255,255,.12);
 }
 .kpi{text-align:center}
 .kpi h3{
-  font-size:2.7rem;
-  background:var(--kpi-gradient);
+  font-size:2.8rem;
+  background:linear-gradient(135deg,#4f46e5,#22d3ee);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 .kpi span{
   font-size:.9rem;
-  color:var(--text-muted);
+  color:#c7d2fe;
 }
 
-/* ================= LIST ================= */
-ul{padding-left:22px;margin-top:12px}
-li{margin-bottom:10px}
-
-/* ================= IMAGE ================= */
+/* ================= IMAGES ================= */
 img{
   width:100%;
-  margin-top:22px;
-  border-radius:22px;
-  border:1px solid var(--card-border);
-  box-shadow:0 22px 45px rgba(2,6,23,.18);
+  margin-top:30px;
+  border-radius:26px;
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 30px 60px rgba(0,0,0,.6);
 }
 
-/* ================= BUTTON ================= */
-.download-btn{
+/* ================= INSIGHTS ================= */
+.insight{
+  margin-bottom:16px;
+  padding:18px 22px;
+  border-left:4px solid #f59e0b;
+  background:rgba(245,158,11,.10);
+  border-radius:14px;
+}
+
+/* ================= RECOMMENDATIONS ================= */
+.reco{
+  margin-bottom:14px;
+  padding:16px 22px;
+  border-left:4px solid #22d3ee;
+  background:rgba(34,211,238,.10);
+  border-radius:14px;
+}
+
+/* ================= DOWNLOAD ================= */
+.download{
+  text-align:center;
+  padding:40px;
+  border-radius:26px;
+  background:linear-gradient(
+    135deg,
+    rgba(255,255,255,.14),
+    rgba(255,255,255,.04)
+  );
+  border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(18px);
+}
+.download a{
   display:inline-block;
-  padding:16px 40px;
+  padding:16px 44px;
   border-radius:999px;
-  background:linear-gradient(135deg,var(--accent-primary),var(--accent-secondary));
+  background:linear-gradient(135deg,#4f46e5,#22d3ee);
   color:#fff;
   font-weight:700;
   text-decoration:none;
-  letter-spacing:.4px;
-  transition:.35s ease;
 }
-.download-btn:hover{
-  transform:translateY(-3px) scale(1.03);
-  box-shadow:0 25px 55px rgba(34,211,238,.45);
+.download p{
+  margin-top:12px;
+  font-size:.85rem;
+  color:#c7d2fe;
 }
 
 /* ================= FOOTER ================= */
 footer{
-  padding:55px 0;
+  padding:60px 0;
   text-align:center;
   font-size:.9rem;
-  color:var(--text-muted);
+  color:#9ca3af;
 }
 </style>
 </head>
 
-<body class="dark">
+<body>
 
-<!-- THEME TOGGLE -->
-<div class="theme-toggle">
-  <button onclick="toggleTheme()">🌙 / ☀️ Theme</button>
-</div>
+<canvas id="particles"></canvas>
+<div class="glow"></div>
 
-<!-- HERO -->
+<!-- HERO (NO REVEAL) -->
 <div class="hero container">
   <h1>BikeStore Sales Performance Analysis</h1>
-  <p>End-to-End Business Analytics Case Study using SQL & Power BI</p>
-  <div class="badge">Advanced Retail Analytics • Recruiter-Ready</div>
+  <p>Executive Data Analytics Case Study using SQL & Power BI</p>
+  <div class="badge">Consulting-Style • Business Ready</div>
 </div>
 
-<!-- BUSINESS PROBLEM -->
-<section class="container">
+<section class="container reveal">
   <h2 class="section-title">Business Problem</h2>
   <p class="section-desc">
-    A bike retail company wanted to gain clear visibility into its sales performance,
-    discount impact, category contribution, and store efficiency to support
-    data-driven decision-making.
+    A bike retail company required a consolidated and reliable view of its
+    sales performance to support strategic decision-making.
   </p>
-  <div class="card">
+  <div class="problem-box">
     <ul>
-      <li>Which products and categories generate the highest revenue?</li>
-      <li>How do discounts affect net revenue and profitability?</li>
+      <li>Which products and categories drive the highest revenue?</li>
+      <li>How do discounts impact net revenue and margins?</li>
       <li>Which stores and staff contribute most to sales?</li>
-      <li>Are there seasonal and weekday sales patterns?</li>
+      <li>Are there identifiable seasonal and weekday patterns?</li>
     </ul>
   </div>
 </section>
 
-<!-- DATASET -->
-<section class="container">
+<section class="container reveal">
   <h2 class="section-title">Dataset & Data Model</h2>
-  <p class="section-desc">
-    The analysis is based on a real-world BikeStore retail dataset consisting of
-    9 relational tables designed using a star-schema approach.
-  </p>
-  <div class="card">
+  <div class="soft-box">
     <ul>
-      <li><b>Fact Table:</b> order_items (transaction-level sales)</li>
+      <li><b>Fact Table:</b> order_items</li>
       <li><b>Dimensions:</b> customers, products, categories, brands, stores, staff, orders</li>
       <li><b>Grain:</b> Order-item level</li>
     </ul>
   </div>
 </section>
 
-<!-- SQL ANALYSIS -->
-<section class="container">
+<section class="container reveal">
   <h2 class="section-title">SQL Analysis (Validated Metrics)</h2>
-  <p class="section-desc">
-    All KPIs and insights were calculated using SQL before visualization in Power BI.
-  </p>
-
-  <div class="card kpi-grid">
+  <div class="kpi-strip">
     <div class="kpi"><h3>7.69M</h3><span>Total Revenue</span></div>
     <div class="kpi"><h3>1615</h3><span>Total Orders</span></div>
     <div class="kpi"><h3>1445</h3><span>Total Customers</span></div>
     <div class="kpi"><h3>4.76K</h3><span>Avg Order Value</span></div>
   </div>
-
-  <img src="images/sql_outputs.png" alt="SQL Output Evidence">
+  <img src="images/sql_outputs.png">
 </section>
 
-<!-- POWER BI -->
-<section class="container">
+<section class="container reveal">
   <h2 class="section-title">Power BI Dashboard</h2>
-  <p class="section-desc">
-    SQL-validated metrics are transformed into an interactive Power BI dashboard.
-  </p>
-  <div class="card">
-    <ul>
-      <li>KPI cards for revenue, orders, customers, discount %, net revenue</li>
-      <li>Monthly & weekly revenue trends</li>
-      <li>Category, product, store & staff performance</li>
-    </ul>
-  </div>
-  <img src="images/powerbi_dashboard.png" alt="Power BI Dashboard">
+  <img src="images/powerbi_dashboard.png">
 </section>
 
-<!-- INSIGHTS -->
-<section class="container">
+<section class="container reveal">
   <h2 class="section-title">Key Business Insights</h2>
-  <div class="card">
-    <ul>
-      <li>Mountain Bikes generate the highest revenue but carry margin risk.</li>
-      <li>Revenue is concentrated across a limited set of products.</li>
-      <li>Baldwin Bikes significantly outperforms other stores.</li>
-      <li>Sales show strong seasonality.</li>
-      <li>Weekends and Mondays outperform mid-week.</li>
-    </ul>
-  </div>
+  <div class="insight">Mountain Bikes generate the highest revenue but increase margin risk.</div>
+  <div class="insight">Revenue is concentrated across a limited number of products.</div>
+  <div class="insight">Baldwin Bikes significantly outperforms other stores.</div>
+  <div class="insight">Sales show strong seasonality and weekday patterns.</div>
 </section>
 
-<!-- RECOMMENDATIONS -->
-<section class="container">
+<section class="container reveal">
   <h2 class="section-title">Business Recommendations</h2>
-  <div class="card">
-    <ul>
-      <li>Adopt category-specific discount strategies.</li>
-      <li>Scale high-profit categories.</li>
-      <li>Replicate best practices from top stores.</li>
-      <li>Run targeted seasonal campaigns.</li>
-    </ul>
-  </div>
+  <div class="reco">Adopt category-specific discount strategies.</div>
+  <div class="reco">Scale high-performing and high-margin categories.</div>
+  <div class="reco">Replicate best practices from top-performing stores.</div>
+  <div class="reco">Plan targeted seasonal and weekday campaigns.</div>
 </section>
 
-<!-- LIMITATIONS -->
-<section class="container">
-  <h2 class="section-title">What I Didn’t Do & Why</h2>
-  <div class="card">
-    <ul>
-      <li>Sales forecasting – future data unavailable.</li>
-      <li>Customer lifetime value – insufficient lifecycle data.</li>
-      <li>Inventory optimization – out of scope.</li>
-    </ul>
-  </div>
-</section>
-
-<!-- PROJECT FILES -->
-<section class="container">
+<section class="container reveal">
   <h2 class="section-title">Project Files</h2>
-  <p class="section-desc">
-    The complete Power BI dashboard used in this analysis is available for download.
-  </p>
-  <div class="card" style="text-align:center">
-    <a class="download-btn"
-       href="https://raw.githubusercontent.com/yashjani1997/BikeStore-BusinessCase-Study/main/BikeStoreDashBoard.zip"
-       target="_blank">
-       ⬇ Download Power BI Dashboard (.pbix)
+  <div class="download">
+    <a href="https://raw.githubusercontent.com/yashjani1997/BikeStore-BusinessCase-Study/main/BikeStoreDashBoard.zip" target="_blank">
+      ⬇ Download Power BI Dashboard (.pbix)
     </a>
-    <p style="margin-top:12px;font-size:.85rem;color:var(--text-muted)">
-      *Unzip the file and open it in Power BI Desktop
-    </p>
+    <p>*Unzip and open in Power BI Desktop</p>
   </div>
-</section>
-
-<!-- CONCLUSION -->
-<section class="container">
-  <h2 class="section-title">Conclusion</h2>
-  <p class="section-desc">
-    This project demonstrates an end-to-end retail analytics workflow — from SQL-based
-    validation to Power BI visualization and executive-level insights.
-  </p>
 </section>
 
 <footer>
   Built by Yash • SQL • Power BI • Business Analytics
 </footer>
 
+<!-- ===== PARTICLES ===== -->
 <script>
-function toggleTheme(){
-  document.body.classList.toggle("dark");
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let w,h,particles=[];
+function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;}
+window.addEventListener('resize',resize);resize();
+
+for(let i=0;i<80;i++){
+  particles.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2+1,dx:(Math.random()-.5)*0.6,dy:(Math.random()-.5)*0.6});
 }
+function animate(){
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle='rgba(255,255,255,.5)';
+  particles.forEach(p=>{
+    p.x+=p.dx;p.y+=p.dy;
+    if(p.x<0||p.x>w)p.dx*=-1;
+    if(p.y<0||p.y>h)p.dy*=-1;
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+<!-- ===== SCROLL REVEAL SCRIPT ===== -->
+<script>
+const reveals=document.querySelectorAll('.reveal');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:0.15});
+reveals.forEach(r=>observer.observe(r));
 </script>
 
 </body>
