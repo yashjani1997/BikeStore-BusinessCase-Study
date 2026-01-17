@@ -198,6 +198,45 @@ footer{
   font-size:.9rem;
   color:#9ca3af;
 }
+
+/* ===== TOP RIGHT UBER LINK ===== */
+.corner-link{
+  position:fixed;
+  top:22px;
+  right:26px;
+  z-index:1000;
+}
+
+.corner-link a{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 16px;
+  border-radius:999px;
+  text-decoration:none;
+  background:linear-gradient(
+    135deg,
+    rgba(255,255,255,.14),
+    rgba(255,255,255,.04)
+  );
+  border:1px solid rgba(255,255,255,.18);
+  backdrop-filter:blur(14px);
+  color:#e5e7eb;
+  font-size:.85rem;
+  font-weight:600;
+  transition:.3s ease;
+}
+
+.corner-link a:hover{
+  transform:translateY(-2px) scale(1.05);
+  box-shadow:0 20px 40px rgba(99,102,241,.35);
+}
+
+.corner-link img{
+  width:24px;
+  height:24px;
+}
+
 </style>
 </head>
 
@@ -324,6 +363,18 @@ const observer=new IntersectionObserver(entries=>{
 },{threshold:0.15});
 reveals.forEach(r=>observer.observe(r));
 </script>
+
+<!-- TOP RIGHT LINK TO UBER -->
+<div class="corner-link">
+  <a href="https://raw.githack.com/yashjani1997/Uber-Trip-Analysis/main/index.html"
+     target="_blank"
+     title="View Uber Trip Analysis">
+     
+    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111703.png" alt="Uber">
+    Uber
+  </a>
+</div>
+
 
 </body>
 </html>
